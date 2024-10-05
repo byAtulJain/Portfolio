@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar with Custom Cursor</title>
+
+    <!-- Google Fonts: IBM Plex Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Raleway:wght@400;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <header>
+        <nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Case Studies</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Recent Work</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Atul Jain</h1>
+                <p><span id="typed-text"></span></p>
+                <a href="#" class="cta-btn">Contact Me 🖤</a>
+                <a href="#" class="cta-btn">Download CV 📄</a> <!-- New Button -->
+            </div>
+            <div class="hero-image">
+                <img src="https://i.ibb.co/jVpLTdn/1705855360506.jpg" alt="Profile Image" ondragstart="return false;" oncontextmenu="return false;">
+            </div>
+        </section>
+    </div>   
+
+    <!-- Custom Cursor Element -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- JavaScript -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const customCursor = document.getElementById('customCursor');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            hamburger.classList.toggle('active');
+        });
+
+        // Custom Cursor Movement
+        document.addEventListener('mousemove', (e) => {
+            customCursor.style.top = `${e.clientY}px`;
+            customCursor.style.left = `${e.clientX}px`;
+        });
+
+        // Change cursor color on hover
+        const changeCursorColor = (color) => {
+            customCursor.style.backgroundColor = color;
+        };
+
+        // Add event listeners to links and buttons for hover effects
+        const linksAndButtons = document.querySelectorAll('a, .cta-btn');
+
+        linksAndButtons.forEach((element) => {
+            element.addEventListener('mouseenter', () => changeCursorColor('#3F8E00')); // Change to hover color
+        });
+
+        linksAndButtons.forEach((element) => {
+            element.addEventListener('mouseleave', () => changeCursorColor('#32CD32')); // Change back to default color
+        });
+
+        // Typing Effect
+        const typedTextElement = document.getElementById('typed-text');
+        const text = "Hello, I'm an engineer with a B.Tech in Information Technology. Over the years, I've developed a strong passion for building and optimizing software solutions.";
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                typedTextElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(type, 50); // Adjust typing speed here
+            }
+        }
+
+        // Start typing effect on page load
+        window.onload = type;
+    </script>
+</body>
+</html>

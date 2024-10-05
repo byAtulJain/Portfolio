@@ -1,0 +1,291 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Hide the default cursor */
+}
+
+body {
+    font-family: 'IBM Plex Mono', monospace; /* Apply IBM Plex Mono to body text */
+    background-color: #080808; /* Set the body background to black */
+    color: #333;
+}
+
+/* Custom Cursor Styling */
+.custom-cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #32CD32; /* Default color */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.1s ease-out;
+    transform: translate(-50%, -50%);
+}
+
+/* Change color of custom cursor when hovering over buttons and links */
+.cta-btn:hover ~ .custom-cursor,
+nav ul li a:hover ~ .custom-cursor {
+    background-color: #3F8E00; /* Change to a different color on hover */
+}
+
+/* Hide custom cursor on small screens */
+@media (max-width: 768px) {
+    .custom-cursor {
+        display: none; /* Hide custom cursor */
+    }
+}
+
+/* Navbar Styling */
+header {
+    background-color: #1B1B1B; /* Dark background */
+    display: flex;
+    justify-content: center; /* Center the navigation bar */
+    align-items: center;
+    padding: 10px 0; /* Adjust top and bottom padding */
+    position: relative;
+}
+
+nav {
+    display: flex;
+    justify-content: center; /* Center the items */
+    align-items: center;
+    padding: 0; /* Remove padding for nav to fit closely to text */
+    width: auto; /* Auto width to fit the content */
+    max-width: 80%; /* Set maximum width */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    font-family: 'IBM Plex Mono', monospace; /* Custom font */
+}
+
+nav ul li {
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: #9C9C9C; /* Updated color */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 5px 10px; /* Adjust padding */
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #32CD32;
+    color: #000; /* Change color to black on hover */
+    border-radius: 5px;
+}
+
+/* Hamburger Menu Styling */
+.hamburger {
+    display: none; /* Hide on larger screens */
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: auto; /* Align to the right */
+}
+
+.hamburger span {
+    width: 20px; /* Adjust width for smaller size */
+    height: 2px; /* Adjust height for smaller size */
+    background-color: #fff;
+    margin: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Hide navigation links initially on small screens */
+#nav-links {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    header {
+        position: fixed; /* Fix the header on small screens */
+        width: 100%; /* Full width */
+        top: 0; /* Align to top */
+        left: 0; /* Align to left */
+        z-index: 1000; /* Ensure it is above other content */
+    }
+
+    nav {
+        justify-content: space-between; /* Align items */
+        width: 100%; /* Full width */
+        padding: 0 20px; /* Add padding to the sides */
+    }
+
+    nav ul {
+        flex-direction: column; /* Stack items vertically */
+        position: absolute; /* Position them absolutely */
+        top: 60px; /* Align below the nav */
+        right: 0;
+        background-color: #1B1B1B;
+        width: 200px;
+        height: 100vh;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-left: 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    nav ul.show {
+        transform: translateX(0);
+    }
+
+    nav ul li {
+        margin-bottom: 20px;
+    }
+
+    /* Hamburger menu visible on smaller devices */
+    .hamburger {
+        display: flex; /* Show hamburger */
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+/* Main Content Container */
+.container {
+    margin: 0 150px; /* Margin for content only on large screens */
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    padding: 50px 0; /* Adjust padding for top and bottom */
+    justify-content: space-around; /* Default for larger screens */
+    align-items: center; /* Center items vertically */
+    flex-wrap: wrap; /* Allow wrapping */
+    width: 100%;
+    height: calc(100vh - 80px); /* Full screen height minus navbar height */
+}
+
+/* Hero Content */
+.hero-content {
+    flex: 1;
+    padding-right: 0px; /* Decrease right padding for larger screens */
+    text-align: left; /* Default alignment for larger screens */
+}
+
+/* Hero Image */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 200px; /* Increase width for larger image */
+    height: 200px; /* Increase height for larger image */
+    border-radius: 50%;
+}
+
+/* Media Queries for Smaller Devices */
+@media (max-width: 800px) {
+    .hero {
+        flex-direction: column; /* Stack items vertically on small screens */
+        justify-content: center; /* Center items vertically */
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text */
+        height: 100vh; /* Full height on small screens */
+    }
+
+    .hero-content {
+        padding-right: 0; /* Remove right padding on small screens */
+        text-align: center; /* Center text on small screens */
+        margin-bottom: 0; /* Remove margin below the content */
+    }
+
+    .hero-image {
+        order: -1; /* Move image to the top */
+        margin-bottom: 0; /* Remove space below the image */
+    }
+
+    .hero-image img {
+        width: 200px; /* Adjust image size for small screens */
+        height: 200px; /* Adjust image size for small screens */
+    }
+}
+
+/* Responsiveness for Smaller Devices */
+@media (max-width: 768px) {
+    .container {
+        margin: 0; /* Remove margins for smaller screens */
+    }
+
+    .hero {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center text */
+    }
+
+    .hero-content h1 {
+        font-size: 36px; /* Adjust font size for smaller screens */
+    }
+
+    .hero-image img {
+        width: 250px; /* Increase image size for small screens */
+        height: 250px; /* Increase image size for small screens */
+    }
+}
+
+/* Hero Content Styles */
+.hero-content h1 {
+    font-size: 48px;
+    color: #fff;
+    font-family: 'Raleway', sans-serif; /* Apply Raleway to h1 */
+    font-weight: 800; /* Extra bold */
+}
+
+.hero-content p {
+    margin: 20px 0;
+    color: #ccc;
+    font-family: 'IBM Plex Mono', monospace; /* Ensure all other text uses IBM Plex Mono */
+    margin-bottom: 40px; /* Add margin to the bottom of the description */
+}
+
+/* CTA Button */
+.cta-btn {
+    background-color: #32CD32; /* Initial background color */
+    color: #000; /* Initial text color */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid transparent; /* Set initial border */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Add transition for smooth effect */
+    margin-right: 10px; /* Add space between buttons */
+}
+
+/* Button Hover Effects */
+.cta-btn:hover {
+    background-color: #080808; /* Background color on hover */
+    color: #3F8E00; /* Text color on hover */
+    border-color: #62BA1B; /* Outline color on hover */
+}
+
+/* Hero Image */
+.hero-image img {
+    width: 200px; /* Increase width for larger image */
+    height: 200px; /* Increase height for larger image */
+    border-radius: 50%;
+}
